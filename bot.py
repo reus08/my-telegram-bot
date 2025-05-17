@@ -21,8 +21,8 @@ from telegram.ext import (
 )
 
 # Google Sheets Configuration
-SERVICE_ACCOUNT_JSON = 'deep-beanbag-441010-p7-e09fbf1fac33.json'
-SPREADSHEET_ID = '1Jy8HS_fERdyfwZRTViKlszqtBb1TxMHneqgI94TXhe8'
+SERVICE_ACCOUNT_JSON = json.loads(getenv('SERVICE_ACCOUNT_JSON'))
+SPREADSHEET_ID = getenv('SPREADSHEET_ID')
 SHEET_NAME = 'Suguan Logs'
 PERSONAL_INFO_SHEET = 'Per Info DB Logs'
 INBOX_SHEET = 'Inbox Message'
@@ -33,7 +33,7 @@ YES_SHEET = 'Yes Log'
 
 
 # Telegram Bot Configuration
-TOKEN = '7485897899:AAHpANvY46Mcg_wHkNqATCMKhsIcWJ3RNWY'
+TOKEN = getenv('TOKEN')
 
 # Conversation states
 INPUT_DATA, CONFIRM_DATA = range(2)  # For /send command
@@ -81,7 +81,7 @@ def init_google_sheets(sheet_name=SHEET_NAME):
             'https://www.googleapis.com/auth/spreadsheets',
             'https://www.googleapis.com/auth/drive'
         ]
-        creds = ServiceAccountCredentials.from_json_keyfile_name(SERVICE_ACCOUNT_JSON, scope)
+        creds = ServiceAccountCredentials.from_json_keyfile_dict(SERVICE_ACCOUNT_JSON, scope)
         client = gspread.authorize(creds)
         spreadsheet = client.open_by_key(SPREADSHEET_ID)
         return spreadsheet.worksheet(sheet_name)
