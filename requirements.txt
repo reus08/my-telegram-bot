@@ -5,3 +5,5 @@ pytz==2022.7
 google-api-python-client==2.70.0
 google-auth-httplib2==0.1.0
 python-dotenv==0.21.0
+pyOpenSSL==23.3.0
+cryptography==41.0.7
